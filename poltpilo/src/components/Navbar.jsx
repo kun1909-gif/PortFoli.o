@@ -21,11 +21,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 ${
+      className={`${styles.paddingX} w-full flex items-center px-20 py-10 fixed top-10 z-20 ${
         scrolled ? "bg-primary" : "bg-transparent"
       }`}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+      <div className="w-full flex justify-between items-center max-w-7xl mx-auto pl-5">
         
         {/* Logo */}
         <Link
@@ -36,15 +36,15 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold flex">
-            Kunal&nbsp;
+          <img src={logo} alt="logo" className="w-9 pl-2.5 h-9 object-contain" />
+          <p className="text-white text-[18px] font-bold flex pl-4">
+            Kunal  &nbsp;
             <span className="sm:block hidden">| Portfolio</span>
           </p>
         </Link>
 
         {/* Desktop Menu */}
-        <ul className="list-none hidden sm:flex flex-row gap-10">
+        <ul className="list-none hidden sm:flex flex-row gap-10 pl-9">
           {navLinks.map((nav) => (
             <li
               key={nav.id}

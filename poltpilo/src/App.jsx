@@ -11,24 +11,25 @@ import Contact from "./components/Contact";
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        
-        <div  className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
-        <Navbar />
-        <Hero />
-        </div>
-        <About />
-        <Experience />
-        <Tech />
-      <Work />
-     <Feedback />
-      </div>
+  <div className="relative z-0 bg-primary max-w-7xl mx-auto px-4">
 
-      <div>
-        <Contact/>
-      </div>
-        
-    </BrowserRouter>
+    <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+      <Navbar />
+      <Hero />
+    </div>
+
+    <About />
+    {/* <Experience /> */}
+    <Tech />
+    <Work />
+    <Feedback />
+  </div>
+
+  <div className="max-w-7xl mx-auto px-4">
+    <Contact />
+  </div>
+</BrowserRouter>
+
   );
 };
 
