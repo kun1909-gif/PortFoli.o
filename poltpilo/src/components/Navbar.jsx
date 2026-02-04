@@ -6,13 +6,13 @@ import { navLinks } from "../components/constants";
 import { logo, menu, close } from "../assets";
 
 const Navbar = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -21,70 +21,97 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center px-20 py-10 fixed top-10 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
-      }`}
+      className={`
+        ${styles.paddingX}
+        fixed top-0 z-20 w-full
+        transition-colors duration-300
+        ${scrolled ? "bg-primary" : "bg-transparent"}
+      `}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto pl-5">
-        
-        {/* Logo */}
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-5 px-4 sm:px-8">
+
+        {/* LOGO */}
         <Link
           to="/"
           className="flex items-center gap-2"
           onClick={() => {
-            setActive("");
+            setActive("Home");
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 pl-2.5 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold flex pl-4">
-            Kunal  &nbsp;
-            <span className="sm:block hidden">| Portfolio</span>
+          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
+          <p className="text-white text-[18px] font-bold">
+            Kunal <span className="hidden sm:inline">| Portfolio</span>
           </p>
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="list-none hidden sm:flex flex-row gap-10 pl-9">
+        {/* DESKTOP MENU */}
+        <ul className="hidden sm:flex list-none gap-8">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
+              className={`
+                cursor-pointer text-[17px] font-medium
+                ${active === nav.title ? "text-white" : "text-secondary"}
+                hover:text-white
+              `}
               onClick={() => setActive(nav.title)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              {nav.id === "resume" ? (
+                <a
+                  href="/Kunal_Gupta_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {nav.title}
+                </a>
+              ) : (
+                <a href={`#${nav.id}`}>{nav.title}</a>
+              )}
             </li>
           ))}
         </ul>
 
-        {/* Mobile Menu */}
-        <div className="sm:hidden flex flex-1 justify-end items-center">
+        {/* MOBILE MENU */}
+        <div className="sm:hidden flex items-center">
           <img
             src={toggle ? close : menu}
             alt="menu"
-            className="w-[28px] h-[28px] object-contain cursor-pointer"
+            className="w-7 h-7 cursor-pointer"
             onClick={() => setToggle(!toggle)}
           />
 
           <div
-            className={`${
-              toggle ? "flex" : "hidden"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            className={`
+              ${toggle ? "flex" : "hidden"}
+              absolute top-16 right-4
+              bg-black/90 backdrop-blur-md
+              rounded-xl p-6 z-30
+            `}
           >
             <ul className="list-none flex flex-col gap-4">
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
-                  className={`${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  } font-medium cursor-pointer text-[16px]`}
+                  className={`
+                    text-[16px] font-medium cursor-pointer
+                    ${active === nav.title ? "text-white" : "text-secondary"}
+                  `}
                   onClick={() => {
-                    setToggle(false);
                     setActive(nav.title);
+                    setToggle(false);
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  {nav.id === "resume" ? (
+     <a
+  href="/Kunal_Gupta_Resume.pdf"
+  download
+>
+                      {nav.title}
+                    </a>
+                  ) : (
+                    <a href={`#${nav.id}`}>{nav.title}</a>
+                  )}
                 </li>
               ))}
             </ul>
